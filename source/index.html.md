@@ -30,63 +30,37 @@ This endpoint creates a buyer.
 ```shell
 curl -X POST -H "Accept: Application/json" -H "Content-Type: application/json"\
  "http://localhost:3000/v1/buyers" \
-  -d '{"email":"teste@teste.com", "cpf":"27546072000", "first_name": "João", "last_name": "Testador"}'
+  -d '{"email":"email@email.com", "notes":"Anotações Gerais", "name": "Nome do Cliente"}'
 ```
-Parameter | Description                              | Required? | Observation
---------- | -----------------------------------------| --------- | -----
-email     | string - email of the buyer              | yes       | email must be a registered bloom user
-cpf       | string - cpf of the buyer                | yes       | CPF must be unique
-first_name| string - first_name of the buyer         | yes       |
-last_name | string - last_name of the buyer          | yes       |
-description | string - description of the buyer      | no        |
-phone_number | string - phone_number of the buyer    | no        |
-birthdate | string - birthdate of the buyer          | no        | format YYYY-mm-dd
-address | string - address of the buyer              | no        |
-email_optin | boolean email_optin of the buyer       | no        | wants to receive email, default: false
-sms_optin | boolean sms_optin of the buyer           | no        | wants to receive sms, default: false
-payment_methods | list payment_methods of the buyer  | no        | object "card" or "bankaccount"
-default_debit | The default_debit of the buyer       | no        |
-default_credit | The default_credit of the buyer     | no        |
-twitter | The twitter of the buyer                   | no        |
-facebook | The facebook of the buyer                 | no        |
+Parameter    | Description                              | Required? | Observation
+---------    | -----------------------------------------| --------- | -----
+email        | string - email of the buyer              | yes       | email must be a registered bloom user
+cpf_cnpj     | string - cpf of the buyer                | no        | CPF/CNPJ must be unique
+name         | string - name of the buyer               | yes       |
+notes        | string - notes                           | no        |
+phone        | int32 - phone number - 9 digits          | no        |
+phone_prefix | int32 - phone profix - 3 digits          | only if phone is sent |
+zip_code     | string - cep                             | no         |
+number       | int32 - number of address                | only if zip_code is sent |
+street       | string - street address                  | only if zip_code is sent |
+city         | string - city                            | no |
+state        | string - state                           | no |
+district     | string - district                        | only if zip_code is sent |
+complement   | string - complement                      | no |
+
 
 > The above command returns JSON structured like this:
 
 ```json
-  {
-    "id": "64428de9655a4694bb3ff5e81d5af546",
-    "status": "active",
-    "resource": "buyer",
-    "account_balance": "0.00",
-    "current_balance": "0.00",
-    "first_name": "João",
-    "last_name": "Testador",
-    "taxpayer_id": "27546072000",
-    "description": null,
-    "email": "teste@teste.com",
-    "phone_number": null,
-    "facebook": null,
-    "twitter": null,
-    "address": {
-        "line1": null,
-        "line2": null,
-        "line3": null,
-        "neighborhood": null,
-        "city": null,
-        "state": null,
-        "postal_code": null,
-        "country_code": null
-    },
-    "delinquent": false,
-    "payment_methods": null,
-    "default_debit": null,
-    "default_credit": null,
-    "default_receipt_delivery_method": null,
-    "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/buyers/64428de9655a4694bb3ff5e81d5af546",
-    "metadata": {},
-    "created_at": "2018-08-27T12:52:59+00:00",
-    "updated_at": "2018-08-27T12:52:59+00:00"
-  }
+{
+    "id": "77C2565F6F064A26ABED4255894224F0",
+    "email": "email@email.com",
+    "name": "Nome do Cliente",
+    "notes": "Anotações Gerais",
+    "created_at": "2013-11-18T14:58:30-02:00",
+    "updated_at": "2013-11-18T14:58:30-02:00",
+    "custom_variables":[]
+}
 ```
 
 ## Update a Buyers
@@ -98,62 +72,35 @@ This endpoint creates a buyer.
 ```shell
 curl -X PUT -H "Accept: Application/json" -H "Content-Type: application/json"\
  "http://localhost:3000/v1/buyers/64428de9655a4694bb3ff5e81d5af546" \
-  -d '{"email":"novo@teste.com", "first_name": "José"}'
+  -d '{"notes": "Novas Anotações Gerais", "name": "Novo Nome do Cliente"}'
 ```
-Parameter | Description                              | Required? | Observation
---------- | -----------------------------------------| --------- | -----
-buyer_id  | string - buyer_id of the buyer           | yes       |
-email     | string - email of the buyer              | no        | email must be a registered bloom user
-first_name| string - first_name of the buyer         | no        |
-last_name | string - last_name of the buyer          | no        |
-description | string - description of the buyer      | no        |
-phone_number | string - phone_number of the buyer    | no        |
-birthdate | string - birthdate of the buyer          | no        | format YYYY-mm-dd
-address | string - address of the buyer              | no        |
-email_optin | boolean email_optin of the buyer       | no        | wants to receive email, default: false
-sms_optin | boolean sms_optin of the buyer           | no        | wants to receive sms, default: false
-payment_methods | list payment_methods of the buyer  | no        | object "card" or "bankaccount"
-default_debit | The default_debit of the buyer       | no        |
-default_credit | The default_credit of the buyer     | no        |
-twitter | The twitter of the buyer                   | no        |
-facebook | The facebook of the buyer                 | no        |
+Parameter    | Description                              | Required? | Observation
+---------    | -----------------------------------------| --------- | -----
+email        | string - email of the buyer              | yes       | email must be a registered bloom user
+cpf_cnpj     | string - cpf of the buyer                | no        | CPF/CNPJ must be unique
+name         | string - name of the buyer               | yes       |
+notes        | string - notes                           | no        |
+phone        | int32 - phone number - 9 digits          | no        |
+phone_prefix | int32 - phone profix - 3 digits          | only if phone is sent |
+zip_code     | string - cep                             | no         |
+number       | int32 - number of address                | only if zip_code is sent |
+street       | string - street address                  | only if zip_code is sent |
+city         | string - city                            | no |
+state        | string - state                           | no |
+district     | string - district                        | only if zip_code is sent |
+complement   | string - complement                      | no |
 
 > The above command returns JSON structured like this:
 
 ```json
   {
-    "id": "64428de9655a4694bb3ff5e81d5af546",
-    "status": "active",
-    "resource": "buyer",
-    "account_balance": "0.00",
-    "current_balance": "0.00",
-    "first_name": "José",
-    "last_name": "Testador",
-    "taxpayer_id": "27546072000",
-    "description": null,
-    "email": "novo@teste.com",
-    "phone_number": null,
-    "facebook": null,
-    "twitter": null,
-    "address": {
-        "line1": null,
-        "line2": null,
-        "line3": null,
-        "neighborhood": null,
-        "city": null,
-        "state": null,
-        "postal_code": null,
-        "country_code": null
-    },
-    "delinquent": false,
-    "payment_methods": null,
-    "default_debit": null,
-    "default_credit": null,
-    "default_receipt_delivery_method": null,
-    "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/buyers/64428de9655a4694bb3ff5e81d5af546",
-    "metadata": {},
-    "created_at": "2018-08-27T12:52:59+00:00",
-    "updated_at": "2018-08-27T12:52:59+00:00"
+    "id": "77C2565F6F064A26ABED4255894224F0",
+    "email": "email@email.com",
+    "name": "Novo Nome do Cliente",
+    "notes": "Novas Anotações Gerais",
+    "created_at": "2013-11-18T14:58:30-02:00",
+    "updated_at": "2013-11-18T14:58:30-02:00",
+    "custom_variables":[]
   }
 ```
 
@@ -168,92 +115,51 @@ curl "http://localhost:3000/v1/buyers"
 
 ```json
 {
-  "resource": "list",
-  "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/buyers?limit=100&offset=0",
-  "items": [
-      {
-          "id": "ce671146c66448f9b0efbdd16b999b07",
-          "status": "active",
-          "resource": "buyer",
-          "account_balance": "0.00",
-          "current_balance": "0.00",
-          "first_name": "JOhn",
-          "last_name": "dasdsadas",
-          "taxpayer_id": "27546072000",
-          "description": null,
-          "email": "teste@teste.com",
-          "phone_number": "321321321",
-          "facebook": null,
-          "twitter": null,
-          "address": {
-              "line1": null,
-              "line2": null,
-              "line3": null,
-              "neighborhood": null,
-              "city": null,
-              "state": null,
-              "postal_code": null,
-              "country_code": null
-          },
-          "delinquent": false,
-          "payment_methods": null,
-          "default_debit": null,
-          "default_credit": null,
-          "default_receipt_delivery_method": null,
-          "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/buyers/ce671146c66448f9b0efbdd16b999b07",
-          "metadata": {
-              "twitter.id": "",
-              "facebook.user_id": "",
-              "my-own-customer-id": ""
-          },
-          "created_at": "2018-08-23T15:21:21+00:00",
-          "updated_at": "2018-08-23T15:21:21+00:00"
-      },
-      {
-          "id": "5835dc2d5fed40509c035f017e4f487c",
-          "status": "active",
-          "resource": "buyer",
-          "account_balance": "0.00",
-          "current_balance": "0.00",
-          "first_name": "JOhn",
-          "last_name": "dasdsadas",
-          "taxpayer_id": "90817804099",
-          "description": null,
-          "email": "dsadasdasdasdasbla@bla.com",
-          "phone_number": "321321321",
-          "facebook": null,
-          "twitter": null,
-          "address": {
-              "line1": null,
-              "line2": null,
-              "line3": null,
-              "neighborhood": null,
-              "city": null,
-              "state": null,
-              "postal_code": null,
-              "country_code": null
-          },
-          "delinquent": false,
-          "payment_methods": null,
-          "default_debit": null,
-          "default_credit": null,
-          "default_receipt_delivery_method": null,
-          "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/buyers/5835dc2d5fed40509c035f017e4f487c",
-          "metadata": {
-              "twitter.id": "",
-              "facebook.user_id": "",
-              "my-own-customer-id": ""
-          },
-          "created_at": "2018-08-23T15:20:45+00:00",
-          "updated_at": "2018-08-23T15:20:45+00:00"
-      },
-  ],
-  "limit": 100,
-  "offset": 0,
-  "has_more": false,
-  "query_count": 39,
-  "total": 2
+    "totalItems": 5,
+    "items": [
+        {
+            "id": "FF3149CE52CB4A789925F154B489BFDD",
+            "email": "email@email.com",
+            "name": "Nome do Cliente",
+            "notes": "Anotações Gerais",
+            "created_at": "2013-11-18T14:58:30-02:00",
+            "updated_at": "2013-11-18T14:58:30-02:00"
+        },
+        {
+            "id": "912FD57927FA43DEB0223C819E18DDFE",
+            "email": "email@email.com",
+            "name": "Nome do Cliente",
+            "notes": "Anotações Gerais",
+            "created_at": "2013-11-18T14:58:30-02:00",
+            "updated_at": "2013-11-18T14:58:30-02:00"
+        },
+        {
+            "id": "32CE45D8B42B4AEEA3D1A1D9227E1790",
+            "email": "email@gmail.com",
+            "name": null,
+            "notes": null,
+            "created_at": "2013-11-18T14:58:30-02:00",
+            "updated_at": "2013-11-18T14:58:30-02:00"
+        },
+        {
+            "id": "1AF1B6EC280149708773FED03EB407AA",
+            "email": "teste@gmail.com",
+            "name": null,
+            "notes": null,
+            "created_at": "2013-11-18T14:58:30-02:00",
+            "updated_at": "2013-11-18T14:58:30-02:00"
+        },
+        {
+            "id": "D65B556E19ED4173976421E84EE7B251",
+            "email": "cliente@gmail.com",
+            "name": null,
+            "notes": null,
+            "created_at": "2013-11-18T14:58:30-02:00",
+            "updated_at": "2013-11-18T14:58:30-02:00"
+        }
+    ]
 }
+
 ```
 
 This endpoint retrieves all buyers.
@@ -268,7 +174,7 @@ This endpoint retrieves all buyers.
 
 
 ```shell
-curl "http://localhost:3000/v1/buyers/ce671146c66448f9b0efbdd16b999b07"
+curl "http://localhost:3000/v1/buyers/77C2565F6F064A26ABED4255894224F0"
 
 ```
 
@@ -277,42 +183,13 @@ curl "http://localhost:3000/v1/buyers/ce671146c66448f9b0efbdd16b999b07"
 
 ```json
 {
-  "id": "ce671146c66448f9b0efbdd16b999b07",
-  "status": "active",
-  "resource": "buyer",
-  "account_balance": "0.00",
-  "current_balance": "0.00",
-  "first_name": "JOhn",
-  "last_name": "dasdsadas",
-  "taxpayer_id": "27546072000",
-  "description": null,
-  "email": "teste@teste.com",
-  "phone_number": "321321321",
-  "facebook": null,
-  "twitter": null,
-  "address": {
-      "line1": null,
-      "line2": null,
-      "line3": null,
-      "neighborhood": null,
-      "city": null,
-      "state": null,
-      "postal_code": null,
-      "country_code": null
-  },
-  "delinquent": false,
-  "payment_methods": null,
-  "default_debit": null,
-  "default_credit": null,
-  "default_receipt_delivery_method": null,
-  "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/buyers/ce671146c66448f9b0efbdd16b999b07",
-  "metadata": {
-      "twitter.id": "",
-      "facebook.user_id": "",
-      "my-own-customer-id": ""
-  },
-  "created_at": "2018-08-23T15:21:21+00:00",
-  "updated_at": "2018-08-23T15:21:21+00:00"
+    "id": "77C2565F6F064A26ABED4255894224F0",
+    "email": "email@email.com",
+    "name": "Nome do Cliente",
+    "notes": "Anotações Gerais",
+    "created_at": "2013-11-18T14:58:30-02:00",
+    "updated_at": "2013-11-18T14:58:30-02:00",
+    "custom_variables":[]
 }
 ```
 
@@ -333,7 +210,7 @@ buyer_id | The ID of the buyer to retrieve
 
 
 ```shell
-curl "http://localhost:3000/v1/buyers/ce671146c66448f9b0efbdd16b999b07"
+curl "http://localhost:3000/v1/buyers/77C2565F6F064A26ABED4255894224F0"
   -X DELETE
 
 ```
@@ -343,9 +220,13 @@ curl "http://localhost:3000/v1/buyers/ce671146c66448f9b0efbdd16b999b07"
 
 ```json
 {
-    "id": "ce671146c66448f9b0efbdd16b999b07",
-    "resource": "buyer",
-    "deleted": true
+    "id": "77C2565F6F064A26ABED4255894224F0",
+    "email": "email@email.com",
+    "name": "Novo Nome do Cliente",
+    "notes": "Novas Anotações Gerais",
+    "created_at": "2013-11-18T14:58:30-02:00",
+    "updated_at": "2013-11-18T14:58:30-02:00",
+    "custom_variables":[]
 }
 ```
 
@@ -364,184 +245,125 @@ buyer_id | The ID of the buyer to delete
 # Cards
 
 ## Create a Card
+
 ### HTTP Request
 `POST http://localhost:3000/v1/cards`
 
 This endpoint creates a card.
 
 ```shell
+
 curl -X POST -H "Accept: Application/json" -H "Content-Type: application/json"\
  "http://localhost:3000/v1/cards" \
-  -d '{"holder_name":"João Testador",
-    "expiration_month":"10",
-    "expiration_year": "2019",
-    "security_code": "518",
-    "card_number": "5316182431291479"}'
+  -d '{
+    "customer_id":"281E91739C1444FE92E26FEE196CF033",
+    "number":"4111111111111111",
+    "verification_value":"552",
+    "first_name": "Joao",
+    "last_name": "Silva",
+    "month": "11",
+    "year": "2019",
+    "description": "Meu Cartão de Crédito"
+  }'
 ```
 
-Parameter        | Description                              | Required? | Observation
----------        | -----------------------------------------| --------- | -----
-holder_name      | string - holder_name of the card         | yes       |
-expiration_month | string - expiration_month of the card    | yes       |
-expiration_year  | string - expiration_year of the card     | yes       |
-security_code    | string - security_code of the card       | yes       |
-card_number      | string - card_number of the card         | yes       |
+
+
+Parameter          | Description                              | Required? | Observation
+---------          | -----------------------------------------| --------- | -----
+customer_id        | string - id of the client                | yes       |
+number             | string - number of the card              | yes       |
+verification_value | string - verification_value of the card  | yes       |
+first_name         | string - first_name of the card          | yes       |
+last_name          | string - last_name of the card           | yes       |
+month              | string - month of the card               | yes       |
+year               | string - year of the card                | yes       |
+description        | string - description of the card         | yes       |
 
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-    "id": "a2cfea555fcd4b16a04e2006b8ccd870",
-    "resource": "token",
-    "used": false,
-    "type": "card",
-    "card": {
-        "id": "0062d96825424112913dbded354c01ea",
-        "resource": "card",
-        "description": null,
-        "card_brand": "MasterCard",
-        "first4_digits": "5316",
-        "expiration_month": "10",
-        "expiration_year": "2019",
-        "holder_name": "João Testador",
-        "is_active": false,
-        "is_valid": true,
-        "is_verified": false,
-        "customer": null,
-        "fingerprint": "7511b78e35c079de0dd21373f2aeac1c5f7344aefdb459ff7e340e32dc0f2411",
-        "address": null,
-        "verification_checklist": {
-            "postal_code_check": "unchecked",
-            "security_code_check": "unchecked",
-            "address_line1_check": "unchecked"
-        },
-        "metadata": {},
-        "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/cards/0062d96825424112913dbded354c01ea",
-        "created_at": "2018-08-27T13:16:32+00:00",
-        "updated_at": "2018-08-27T13:16:32+00:00"
-    },
-    "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/tokens/a2cfea555fcd4b16a04e2006b8ccd870",
-    "created_at": "2018-08-27T13:16:32+00:00",
-    "updated_at": "2018-08-27T13:16:32+00:00"
+    "id": "9B41FB19CBA44913B1EF990A10382E7E",
+    "description": "Meu Cartão de Crédito",
+    "item_type": "credit_card",
+    "data": {
+        "holder_name": "Joao Silva",
+        "display_number": "XXXX-XXXX-XXXX-1111",
+        "brand": "visa",
+        "month":12,
+        "year":2022
+    }
 }
 ```
 
-## Get all Cards
+## Get all Cards from a client
 
 ```shell
-curl "http://localhost:3000/v1/cards"
+curl "http://localhost:3000/v1/cards?id=7894OHDASDASD0A9432"
 
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
-{
-    "resource": "list",
-    "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/cards?limit=100&offset=0",
-    "items": [
-        {
-            "id": "3cd5d236a31141db87ce7b90e66321f4",
-            "resource": "card",
-            "description": null,
-            "card_brand": "MasterCard",
-            "first4_digits": "5425",
-            "expiration_month": "1",
-            "expiration_year": "2019",
-            "holder_name": "teste",
-            "is_active": false,
-            "is_valid": true,
-            "is_verified": false,
-            "customer": null,
-            "fingerprint": "b7c2312154b6c4860a55b1031448e7d8bfdafd50b965552910df79b7e4267e3e",
-            "address": null,
-            "verification_checklist": {
-                "postal_code_check": "unchecked",
-                "security_code_check": "unchecked",
-                "address_line1_check": "unchecked"
-            },
-            "metadata": {},
-            "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/cards/3cd5d236a31141db87ce7b90e66321f4",
-            "created_at": "2018-08-23T13:31:41+00:00",
-            "updated_at": "2018-08-23T13:31:41+00:00"
-        },
-        {
-            "id": "9d29d52a789d4fed81fca0c7d91f327b",
-            "resource": "card",
-            "description": null,
-            "card_brand": "MasterCard",
-            "first4_digits": "5425",
-            "expiration_month": "1",
-            "expiration_year": "2019",
-            "holder_name": "teste",
-            "is_active": false,
-            "is_valid": true,
-            "is_verified": false,
-            "customer": null,
-            "fingerprint": "b7c2312154b6c4860a55b1031448e7d8bfdafd50b965552910df79b7e4267e3e",
-            "address": null,
-            "verification_checklist": {
-                "postal_code_check": "unchecked",
-                "security_code_check": "unchecked",
-                "address_line1_check": "unchecked"
-            },
-            "metadata": {},
-            "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/cards/9d29d52a789d4fed81fca0c7d91f327b",
-            "created_at": "2018-08-23T12:39:26+00:00",
-            "updated_at": "2018-08-23T12:39:26+00:00"
-        }
-    ],
-    "limit": 100,
-    "offset": 0,
-    "has_more": false,
-    "query_count": 2,
-    "total": 2
-}
+[{
+    "id": "48D603C05F634244A1D3FC2BFF35D10A",
+    "description": "Meu Cartão de Crédito Um",
+    "item_type": "credit_card",
+    "data": {
+        "holder_name": "Joao Silva",
+        "display_number": "XXXX-XXXX-XXXX-1111",
+        "brand": "visa",
+        "month":10,
+        "year":2022
+    }
+}, {
+    "id": "9B41FB19CBA44913B1EF990A10382E7E",
+    "description": "Meu Cartão de Crédito Dois",
+    "item_type": "credit_card",
+    "data": {
+        "holder_name": "Jose Santos",
+        "display_number": "XXXX-XXXX-XXXX-1111",
+        "brand": "visa",
+        "month":7,
+        "year":2019
+    }
+}]
 ```
 
 This endpoint retrieves all cards.
 
 ### HTTP Request
 
-`GET http://localhost:3000/v1/cards`
+`GET http://localhost:3000/v1/cards?id=:client_id`
 
 
 
-## Get a specific Card
+## Get a specific card from a client
 
 
 ```shell
-curl "http://localhost:3000/v1/cards/3cd5d236a31141db87ce7b90e66321f4"
+curl "http://localhost:3000/v1/cards/281E91739C1444FE92E26FEE196CF033?card_id=7AE0E8EC153B4D24B1984FCBF6A93704"
 
 ```
 > The above command returns JSON structured like this:
 
 ```json
 {
-    "id": "3cd5d236a31141db87ce7b90e66321f4",
-    "resource": "card",
-    "description": null,
-    "card_brand": "MasterCard",
-    "first4_digits": "5425",
-    "expiration_month": "1",
-    "expiration_year": "2019",
-    "holder_name": "teste",
-    "is_active": false,
-    "is_valid": true,
-    "is_verified": false,
-    "customer": null,
-    "fingerprint": "b7c2312154b6c4860a55b1031448e7d8bfdafd50b965552910df79b7e4267e3e",
-    "address": null,
-    "verification_checklist": {
-        "postal_code_check": "unchecked",
-        "security_code_check": "unchecked",
-        "address_line1_check": "unchecked"
-    },
-    "metadata": {},
-    "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/cards/3cd5d236a31141db87ce7b90e66321f4",
-    "created_at": "2018-08-23T13:31:41+00:00",
-    "updated_at": "2018-08-23T13:31:41+00:00"
+    "id": "7AE0E8EC153B4D24B1984FCBF6A93704",
+    "description": "Meu Cartão de Crédito",
+    "item_type": "credit_card",
+    "customer_id": "281E91739C1444FE92E26FEE196CF033",
+    "data": {
+        "brand": "VISA",
+        "holder_name": "Joao Silva",
+        "display_number": "XXXX-XXXX-XXXX-1111",
+        "bin": "411111",
+        "month": 11,
+        "year": 2019
+    }
 }
 ```
 
@@ -550,7 +372,7 @@ This endpoint retrieves a specific buyer.
 
 ### HTTP Request
 
-`GET http://localhost:3000/v1/cards/:card_id`
+`GET http://localhost:3000/v1/cards/:customer_id?id=:card_id`
 
 ### URL Parameters
 
@@ -558,11 +380,11 @@ Parameter | Description
 --------- | -----------
 card_id | The ID of the card to retrieve
 
-## Delete a specific Card
+## Delete a specific card from a client
 
 
 ```shell
-curl "http://localhost:3000/v1/cards/3cd5d236a31141db87ce7b90e66321f4" \
+curl "http://localhost:3000/v1/cards/281E91739C1444FE92E26FEE196CF033?card_id=7AE0E8EC153B4D24B1984FCBF6A93704" \
   -X DELETE
 
 ```
@@ -572,9 +394,18 @@ curl "http://localhost:3000/v1/cards/3cd5d236a31141db87ce7b90e66321f4" \
 
 ```json
 {
-    "id": "3cd5d236a31141db87ce7b90e66321f4",
-    "resource": "card",
-    "deleted": true
+    "id": "7AE0E8EC153B4D24B1984FCBF6A93704",
+    "description": "Meu Cartão de Crédito",
+    "item_type": "credit_card",
+    "customer_id": "281E91739C1444FE92E26FEE196CF033",
+    "data": {
+        "brand": "VISA",
+        "holder_name": "Joao Silva",
+        "display_number": "XXXX-XXXX-XXXX-1111",
+        "bin": "411111",
+        "month": 11,
+        "year": 2019
+    }
 }
 ```
 
@@ -582,7 +413,7 @@ This endpoint deletes a specific card.
 
 ### HTTP Request
 
-`DELETE http://localhost:3000/v1/cards/:card_id`
+`DELETE http://localhost:3000/v1/cards/:customer_id?id=:card_id`
 
 ### URL Parameters
 
@@ -590,1098 +421,881 @@ Parameter | Description
 --------- | -----------
 card_id  | The ID of the card to delete
 
-## Associate a card to a buyer
+# Plans (USE IUGU DASHBOARD)
+## Create a Plan  (USE IUGU DASHBOARD)
+### HTTP Request
+`POST http://localhost:3000/v1/plans`
 
+This endpoint creates a plan.
 
 ```shell
 curl -X POST -H "Accept: Application/json" -H "Content-Type: application/json"\
- "http://localhost:3000/v1/cards/associate_card_buyer" \
-  -d '{"token": "a2cfea555fcd4b16a04e2006b8ccd870",
-	   "customer": "64428de9655a4694bb3ff5e81d5af546"}'
+ "http://localhost:3000/v1/plans" \
+  -d '{"name" :"Plano Básico",
+      "identifier": "basic_plan",
+      "interval": 1,
+      "interval_type": "months",
+      "value_cents": 1000
+    }'
 ```
+
+
+Parameter | Description                              | Required? | Observation
+--------- | -----------------------------------------| --------- | -----
+name | string - name of the plan             | yes        |
+identifier | string - identifier of the plan | yes        |
+interval | string - interval of the plan      | yes        | 'Ciclo do plano (Número inteiro maior que 0). Intervalo até a próxima cobrança.'
+interval_type | string - interval_type of the plan      | yes        | 'Tipo de interval ("weeks" ou "months").'
+value_cents | string - value_cents of the plan      | yes        | 'Preço do plano em centavos'
+payable_with | string - payable_with of the plan      | no        | default its credit_card
 
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-    "id": "0062d96825424112913dbded354c01ea",
-    "resource": "card",
-    "description": null,
-    "card_brand": "MasterCard",
-    "first4_digits": "5316",
-    "expiration_month": "10",
-    "expiration_year": "2019",
-    "holder_name": "João Testador",
-    "is_active": true,
-    "is_valid": true,
-    "is_verified": false,
-    "customer": "64428de9655a4694bb3ff5e81d5af546",
-    "fingerprint": "7511b78e35c079de0dd21373f2aeac1c5f7344aefdb459ff7e340e32dc0f2411",
-    "address": null,
-    "verification_checklist": {
-        "postal_code_check": "unchecked",
-        "security_code_check": "fail",
-        "address_line1_check": "unchecked"
-    },
-    "metadata": {},
-    "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/cards/0062d96825424112913dbded354c01ea",
-    "created_at": "2018-08-27T13:16:32+00:00",
-    "updated_at": "2018-08-27T13:46:25+00:00"
+    "id": "593C92165AF44493B65DE17A216C76D6",
+    "name": "Plano Básico",
+    "identifier": "basic_plan",
+    "interval": 1,
+    "interval_type": "months",
+    "created_at": "2014-04-23T17:14:15-03:00",
+    "updated_at": "2014-04-23T17:14:15-03:00",
+    "prices": [{
+        "created_at": "2014-04-23T17:14:15-03:00",
+        "currency": "BRL",
+        "id": "F465EE77AC424DA2B075133C96FF10CA",
+        "plan_id": "593C92165AF44493B65DE17A216C76D6",
+        "updated_at": "2014-04-23T17:14:15-03:00",
+        "value_cents": 1000
+    }],
+    "features": [{
+        "created_at": "2014-04-23T17:14:15-03:00",
+        "id": "6101C66D06564E3DB834BCE235A587A6",
+        "identifier": "users",
+        "important": null,
+        "name": "Número de Usuários",
+        "plan_id": "593C92165AF44493B65DE17A216C76D6",
+        "position": 1,
+        "updated_at": "2014-04-23T17:14:15-03:00",
+        "value": 10
+    }]
+}
+```
+## Update a Plan  (USE IUGU DASHBOARD)
+### HTTP Request
+`PUT http://localhost:3000/v1/plans/:id`
+
+This endpoint updates a plan.
+
+```shell
+curl -X PUT -H "Accept: Application/json" -H "Content-Type: application/json"\
+ "http://localhost:3000/v1/plans/593C92165AF44493B65DE17A216C76D6" \
+  -d '{"identifier" :"basic_plan_new"
+    }'
+```
+
+
+Parameter | Description                              | Required? | Observation
+--------- | -----------------------------------------| --------- | -----
+name | string - name of the plan             | yes        |
+identifier | string - identifier of the plan | yes        |
+interval | string - interval of the plan      | yes        | 'Ciclo do plano (Número inteiro maior que 0). Intervalo até a próxima cobrança.'
+interval_type | string - interval_type of the plan      | yes        | 'Tipo de interval ("weeks" ou "months").'
+value_cents | string - value_cents of the plan      | yes        | 'Preço do plano em centavos'
+payable_with | string - payable_with of the plan      | no        | default its credit_card
+
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "id": "593C92165AF44493B65DE17A216C76D6",
+    "name": "Plano Básico",
+    "identifier": "basic_plan_new",
+    "interval": 1,
+    "interval_type": "months",
+    "created_at": "2014-04-23T17:14:15-03:00",
+    "updated_at": "2014-04-23T17:14:15-03:00",
+    "prices": [{
+        "created_at": "2014-04-23T17:14:15-03:00",
+        "currency": "BRL",
+        "id": "F465EE77AC424DA2B075133C96FF10CA",
+        "plan_id": "593C92165AF44493B65DE17A216C76D6",
+        "updated_at": "2014-04-23T17:14:15-03:00",
+        "value_cents": 1000
+    }],
+    "features": [{
+        "created_at": "2014-04-23T17:14:15-03:00",
+        "id": "6101C66D06564E3DB834BCE235A587A6",
+        "identifier": "users",
+        "important": null,
+        "name": "Número de Usuários",
+        "plan_id": "593C92165AF44493B65DE17A216C76D6",
+        "position": 1,
+        "updated_at": "2014-04-23T17:14:15-03:00",
+        "value": 10
+    }]
+}
+```
+## Delete a Plan  (USE IUGU DASHBOARD)
+### HTTP Request
+`DELETE http://localhost:3000/v1/plans/:id`
+
+This endpoint deletes a plan.
+
+```shell
+curl -X DELETE -H "Accept: Application/json" -H "Content-Type: application/json"\
+ "http://localhost:3000/v1/plans/593C92165AF44493B65DE17A216C76D6"
+```
+
+
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "id": "593C92165AF44493B65DE17A216C76D6",
+    "name": "Plano Básico",
+    "identifier": "basic_plan",
+    "interval": 1,
+    "interval_type": "months",
+    "created_at": "2014-04-23T17:14:15-03:00",
+    "updated_at": "2014-04-23T17:14:15-03:00",
+    "prices": [{
+        "created_at": "2014-04-23T17:14:15-03:00",
+        "currency": "BRL",
+        "id": "F465EE77AC424DA2B075133C96FF10CA",
+        "plan_id": "593C92165AF44493B65DE17A216C76D6",
+        "updated_at": "2014-04-23T17:14:15-03:00",
+        "value_cents": 1000
+    }],
+    "features": [{
+        "created_at": "2014-04-23T17:14:15-03:00",
+        "id": "6101C66D06564E3DB834BCE235A587A6",
+        "identifier": "users",
+        "important": null,
+        "name": "Número de Usuários",
+        "plan_id": "593C92165AF44493B65DE17A216C76D6",
+        "position": 1,
+        "updated_at": "2014-04-23T17:14:15-03:00",
+        "value": 10
+    }]
+}
+```
+## Get a plan by its id
+### HTTP Request
+`GET http://localhost:3000/v1/plans/:id`
+
+This endpoint get a plan.
+
+```shell
+curl -X GET -H "Accept: Application/json" -H "Content-Type: application/json"\
+ "http://localhost:3000/v1/plans/593C92165AF44493B65DE17A216C76D6"
+```
+
+
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "id": "593C92165AF44493B65DE17A216C76D6",
+    "name": "Plano Básico",
+    "identifier": "basic_plan",
+    "interval": 1,
+    "interval_type": "months",
+    "created_at": "2014-04-23T17:14:15-03:00",
+    "updated_at": "2014-04-23T17:14:15-03:00",
+    "prices": [{
+        "created_at": "2014-04-23T17:14:15-03:00",
+        "currency": "BRL",
+        "id": "F465EE77AC424DA2B075133C96FF10CA",
+        "plan_id": "593C92165AF44493B65DE17A216C76D6",
+        "updated_at": "2014-04-23T17:14:15-03:00",
+        "value_cents": 1000
+    }],
+    "features": [{
+        "created_at": "2014-04-23T17:14:15-03:00",
+        "id": "6101C66D06564E3DB834BCE235A587A6",
+        "identifier": "users",
+        "important": null,
+        "name": "Número de Usuários",
+        "plan_id": "593C92165AF44493B65DE17A216C76D6",
+        "position": 1,
+        "updated_at": "2014-04-23T17:14:15-03:00",
+        "value": 10
+    }]
+}
+```
+## Get a plan by its identifier
+### HTTP Request
+`GET http://localhost:3000/v1/plans/identifier/:identifier`
+
+This endpoint get a plan by its identifier.
+
+```shell
+curl -X GET -H "Accept: Application/json" -H "Content-Type: application/json"\
+ "http://localhost:3000/v1/plans/identifier/basic_plan"
+```
+
+
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "id": "593C92165AF44493B65DE17A216C76D6",
+    "name": "Plano Básico",
+    "identifier": "basic_plan",
+    "interval": 1,
+    "interval_type": "months",
+    "created_at": "2014-04-23T17:14:15-03:00",
+    "updated_at": "2014-04-23T17:14:15-03:00",
+    "prices": [{
+        "created_at": "2014-04-23T17:14:15-03:00",
+        "currency": "BRL",
+        "id": "F465EE77AC424DA2B075133C96FF10CA",
+        "plan_id": "593C92165AF44493B65DE17A216C76D6",
+        "updated_at": "2014-04-23T17:14:15-03:00",
+        "value_cents": 1000
+    }],
+    "features": [{
+        "created_at": "2014-04-23T17:14:15-03:00",
+        "id": "6101C66D06564E3DB834BCE235A587A6",
+        "identifier": "users",
+        "important": null,
+        "name": "Número de Usuários",
+        "plan_id": "593C92165AF44493B65DE17A216C76D6",
+        "position": 1,
+        "updated_at": "2014-04-23T17:14:15-03:00",
+        "value": 10
+    }]
 }
 ```
 
-This endpoint associate a card to a buyer.
-
+## Get all plans
 ### HTTP Request
+`GET http://localhost:3000/v1/plans`
 
-`POST http://localhost:3000/v1/cards/associate_card_buyer`
+This endpoint get all plans.
 
-### URL Parameters
+```shell
+curl -X GET -H "Accept: Application/json" -H "Content-Type: application/json"\
+ "http://localhost:3000/v1/plans"
+```
 
-Parameter | Description
---------- | -----------
-token     | card token, returned when its created. can be used only one time.
-customer  | buyer id
+> The above command returns JSON structured like this:
 
-# Transactions
-
-## Create a Transaction
+```json
+{
+    "totalItems": 1,
+    "items": [{
+        "id": "593C92165AF44493B65DE17A216C76D6",
+        "name": "Plano Básico",
+        "identifier": "basic_plan",
+        "interval": 1,
+        "interval_type": "months",
+        "created_at": "2014-04-23T17:14:15-03:00",
+        "updated_at": "2014-04-23T17:19:46-03:00",
+        "prices": [{
+            "created_at": "2014-04-23T17:14:15-03:00",
+            "currency": "BRL",
+            "id": "F465EE77AC424DA2B075133C96FF10CA",
+            "updated_at": "2014-04-23T17:14:15-03:00",
+            "value_cents": 1000
+        }]
+    }]
+}
+```
+# Subscription
+## Create a Subscription
 ### HTTP Request
-`POST http://localhost:3000/v1/transaction`
+`POST http://localhost:3000/v1/subscriptions`
 
-This endpoint creates a transaction.
+This endpoint creates a subscription.
 
 ```shell
 curl -X POST -H "Accept: Application/json" -H "Content-Type: application/json"\
- "http://localhost:3000/v1/transactions" \
-  -d '{"amount":"10032",
-       "customer":"64428de9655a4694bb3ff5e81d5af546",
-       "payment_type": "credit",
-        "number_installments": "5"
-     }'
+ "http://localhost:3000/v1/subscriptions" \
+  -d '{"customer_id":"FF3149CE52CB4A789925F154B48"}'
 ```
 
-Parameter    | Description                              | Required? | Observation
----------    | -----------------------------------------| --------- | -----
-amount       | integer - holder_name of the card         | yes       | in cents $
-customer     | string - buyer id for recurrent charge   | no        | buyer id from bloom user
-payment_type | string - expiration_year of the card     | no        | Default its credit
-installment_plan.number_installments | integer - number of installments | yes | value range from (0 - 10)
-token | string - card token for one unique payment     | no        |
-on_behalf_of | string - seller id for payment     | no        | Default its Bloom Tester SellerId
-capture | string     | no        |  capture transaction (true) or create pre-authorization (false) to capture later
+Parameter              | Description                              | Required? | Observation
+---------              | -----------------------------------------| ---------- | -----
+plan_identifier        | string - identifier of the plan          | no        |
+customer_id            | string - client id                       | yes        |
+expires_at             | string - expiration date                 | no        | Data de Expiração "DD-MM-AAAA". (Data da primeira cobrança, as próximas datas de cobrança dependem do "intervalo" do plano vinculado).
+only_on_charge_success | boolean - change on success      | no        | Apenas Cria a Assinatura se a Cobrança for bem sucedida. Isso só funciona caso o cliente já tenha uma forma de pagamento padrão cadastrada. Não enviar "expires_at". (Default é false)
+ignore_due_email       | boolean - ignore due email         | no        |  (Default é false)
+payable_with           | string - options of payment        | no         |  (Default é credit_card)
 
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-    "id": "84824e3160a7431fb5004d41eaca4e76",
-    "resource": "transaction",
-    "status": "succeeded",
-    "amount": "100.32",
-    "original_amount": "100.32",
+    "id": "ECF36F9AAF374D76A48646EDE8FE806D",
+    "suspended": false,
+    "plan_identifier": "id1",
+    "price_cents": 200,
     "currency": "BRL",
-    "description": null,
-    "payment_type": "credit",
-    "transaction_number": "Z133937-000260004",
-    "gateway_authorizer": "cielo",
-    "app_transaction_uid": null,
-    "refunds": null,
-    "rewards": null,
-    "discounts": null,
-    "pre_authorization": null,
-    "sales_receipt": "12a752faa6dd40b3b04232631ca37610",
-    "on_behalf_of": "cfa96058daa74d279d17f4908e7f6578",
-    "customer": "64428de9655a4694bb3ff5e81d5af546",
-    "statement_descriptor": "CANALBLOOM",
-    "payment_method": {
-        "id": "0062d96825424112913dbded354c01ea",
-        "resource": "card",
-        "description": null,
-        "card_brand": "MasterCard",
-        "first4_digits": "5316",
-        "last4_digits": "1479",
-        "expiration_month": "10",
-        "expiration_year": "2019",
-        "holder_name": "João Testador",
-        "is_active": true,
-        "is_valid": true,
-        "is_verified": false,
-        "customer": "64428de9655a4694bb3ff5e81d5af546",
-        "fingerprint": "7511b78e35c079de0dd21373f2aeac1c5f7344aefdb459ff7e340e32dc0f2411",
-        "address": null,
-        "verification_checklist": {
-            "postal_code_check": "unchecked",
-            "security_code_check": "fail",
-            "address_line1_check": "unchecked"
-        },
-        "metadata": {},
-        "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/cards/0062d96825424112913dbded354c01ea",
-        "created_at": "2018-08-27T13:16:32+00:00",
-        "updated_at": "2018-08-27T13:46:25+00:00"
-    },
-    "point_of_sale": {
-        "entry_mode": "manually_keyed",
-        "identification_number": null
-    },
-    "installment_plan": {
-        "number_installments": "5",
-        "mode": "interest_free"
-    },
-    "refunded": false,
-    "voided": false,
-    "captured": true,
-    "fees": "4.00",
-    "fee_details": [
-        {
-            "amount": "4.00",
-            "prepaid": false,
-            "currency": "BRL",
-            "type": "zoop_fee_brazil",
-            "is_gateway_fee": false,
-            "description": "Zoop card-present transaction fee"
+    "features": {
+        "feat": {
+            "name": "Feature",
+            "value": 0
         }
-    ],
-    "location_latitude": null,
-    "location_longitude": null,
-    "individual": null,
-    "business": null,
-    "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/transactions/84824e3160a7431fb5004d41eaca4e76",
-    "metadata": {},
-    "expected_on": "2018-09-26T00:00:00+00:00",
-    "created_at": "2018-08-27T14:23:50+00:00",
-    "updated_at": "2018-08-27T14:23:52+00:00",
-    "payment_authorization": {
-        "authorizer_id": "000260004",
-        "authorization_code": "133937",
-        "authorization_nsu": "20180510122911535"
     },
-    "history": [
-        {
-            "id": "952f6f67a8784290a9643cfb6f68cd8d",
-            "transaction": "84824e3160a7431fb5004d41eaca4e76",
-            "amount": "100.32",
-            "operation_type": "created",
-            "status": "succeeded",
-            "response_code": null,
-            "response_message": null,
-            "authorization_code": null,
-            "authorizer_id": null,
-            "authorization_nsu": null,
-            "created_at": "2018-08-27 14:23:50"
-        },
-        {
-            "id": "7c19a005b0cd417e81514b0d85d4a0eb",
-            "transaction": "84824e3160a7431fb5004d41eaca4e76",
-            "amount": "100.32",
-            "operation_type": "authorization",
-            "status": "succeeded",
-            "response_code": "00",
-            "response_message": null,
-            "authorization_code": "133937",
-            "authorizer_id": "000260004",
-            "authorization_nsu": "20180510122911535",
-            "created_at": "2018-08-27 14:23:52"
-        }
-    ]
+    "expires_at": null,
+    "created_at": "2013-11-19T11:24:29-02:00",
+    "updated_at": "2013-11-19T11:24:43-02:00",
+    "customer_name": "Nome do Cliente",
+    "customer_email": "email@email.com",
+    "cycled_at": null,
+    "credits_min": 0,
+    "credits_cycle": null,
+    "customer_id": "FF3149CE52CB4A789925F154B489BFDD",
+    "plan_name": "plan1",
+    "customer_ref": "Nome do Cliente",
+    "plan_ref": "plan1",
+    "active": true,
+    "in_trial": null,
+    "credits": 0,
+    "credits_based": false,
+    "recent_invoices": null,
+    "subitems": [{
+        "id": "6D518D88B33F48FEA8964D5573E220D3",
+        "description": "Item um",
+        "quantity": 1,
+        "price_cents": 1000,
+        "price": "R$ 10,00",
+        "total": "R$ 10,00"
+    }],
+    "logs": [{
+        "id": "477388CC4C024520B552641724A62970",
+        "description": "Fatura criada",
+        "notes": "Fatura criada 1x Ativação de Assinatura: plan1 = R$ 2,00;1x Item um = R$ 10,00;",
+        "created_at": "2013-11-19T11:24:43-02:00"
+    }, {
+        "id": "706436F169CE465B806163964A25400A",
+        "description": "Assinatura Criada",
+        "notes": "Assinatura Criada",
+        "created_at": "2013-11-19T11:24:29-02:00"
+    }],
+    "custom_variables":[]
 }
 ```
+## Update a Subscription
+### HTTP Request
+`PUT http://localhost:3000/v1/subscriptions/:id`
 
-## Get all Transactions
+This endpoint updates a subscription.
 
 ```shell
-curl "http://localhost:3000/v1/transactions"
-
+curl -X PUT -H "Accept: Application/json" -H "Content-Type: application/json"\
+ "http://localhost:3000/v1/subscriptions/ECF36F9AAF374D76A48646EDE8FE806D" \
+  -d '{"identifier" :"basic_plan_new"
+    }'
 ```
+
+
+Parameter              | Description                              | Required? | Observation
+---------              | -----------------------------------------| ---------- | -----
+plan_identifier        | string - identifier of the plan          | no        |
+id            | string - client id                       | yes        |
+expires_at             | string - expiration date                 | no        | Data de Expiração "DD-MM-AAAA". (Data da primeira cobrança, as próximas datas de cobrança dependem do "intervalo" do plano vinculado).
+only_on_charge_success | boolean - change on success      | no        | Apenas Cria a Assinatura se a Cobrança for bem sucedida. Isso só funciona caso o cliente já tenha uma forma de pagamento padrão cadastrada. Não enviar "expires_at". (Default é false)
+ignore_due_email       | boolean - ignore due email         | no        |  (Default é false)
+payable_with           | string - options of payment        | no         |  (Default é credit_card)
+
+
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-    "resource": "list",
-    "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/transactions",
-    "items": [
-        {
-            "id": "669a29234d6a4a83bd37542793282abc",
-            "resource": "transaction",
-            "status": "succeeded",
-            "amount": "100.32",
-            "original_amount": "100.32",
-            "currency": "BRL",
-            "description": null,
-            "payment_type": "credit",
-            "transaction_number": "Z133937-000260004",
-            "gateway_authorizer": "cielo",
-            "app_transaction_uid": null,
-            "refunds": null,
-            "rewards": null,
-            "discounts": null,
-            "pre_authorization": null,
-            "sales_receipt": "055310be5b4244bf8da006a449368420",
-            "on_behalf_of": "cfa96058daa74d279d17f4908e7f6578",
-            "customer": "64428de9655a4694bb3ff5e81d5af546",
-            "statement_descriptor": "CANALBLOOM",
-            "payment_method": {
-                "id": "0062d96825424112913dbded354c01ea",
-                "resource": "card",
-                "description": null,
-                "card_brand": "MasterCard",
-                "first4_digits": "5316",
-                "last4_digits": "1479",
-                "expiration_month": "10",
-                "expiration_year": "2019",
-                "holder_name": "João Testador",
-                "is_active": true,
-                "is_valid": true,
-                "is_verified": false,
-                "customer": "64428de9655a4694bb3ff5e81d5af546",
-                "fingerprint": "7511b78e35c079de0dd21373f2aeac1c5f7344aefdb459ff7e340e32dc0f2411",
-                "address": null,
-                "verification_checklist": {
-                    "postal_code_check": "unchecked",
-                    "security_code_check": "fail",
-                    "address_line1_check": "unchecked"
-                },
-                "metadata": {},
-                "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/cards/0062d96825424112913dbded354c01ea",
-                "created_at": "2018-08-27T13:16:32+00:00",
-                "updated_at": "2018-08-27T13:46:25+00:00"
-            },
-            "point_of_sale": {
-                "entry_mode": "manually_keyed",
-                "identification_number": null
-            },
-            "installment_plan": {
-                "number_installments": "5",
-                "mode": "interest_free"
-            },
-            "refunded": false,
-            "voided": false,
-            "captured": true,
-            "fees": "4.00",
-            "fee_details": [
-                {
-                    "amount": "4.00",
-                    "prepaid": false,
-                    "currency": "BRL",
-                    "type": "zoop_fee_brazil",
-                    "is_gateway_fee": false,
-                    "description": "Zoop card-present transaction fee"
-                }
-            ],
-            "location_latitude": null,
-            "location_longitude": null,
-            "individual": null,
-            "business": null,
-            "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/transactions/669a29234d6a4a83bd37542793282abc",
-            "metadata": {},
-            "expected_on": "2018-09-26T00:00:00+00:00",
-            "created_at": "2018-08-27T14:26:18+00:00",
-            "updated_at": "2018-08-27T14:26:20+00:00",
-            "payment_authorization": {
-                "authorizer_id": "000260004",
-                "authorization_code": "133937",
-                "authorization_nsu": "20180510122911535"
-            },
-            "history": [
-                {
-                    "id": "3cb8c44457794f6c87adedba4f16cd32",
-                    "transaction": "669a29234d6a4a83bd37542793282abc",
-                    "amount": "100.32",
-                    "operation_type": "created",
-                    "status": "succeeded",
-                    "response_code": null,
-                    "response_message": null,
-                    "authorization_code": null,
-                    "authorizer_id": null,
-                    "authorization_nsu": null,
-                    "created_at": "2018-08-27 14:26:18"
-                },
-                {
-                    "id": "81b2a682fce844998afa920a4b8705cd",
-                    "transaction": "669a29234d6a4a83bd37542793282abc",
-                    "amount": "100.32",
-                    "operation_type": "authorization",
-                    "status": "succeeded",
-                    "response_code": "00",
-                    "response_message": null,
-                    "authorization_code": "133937",
-                    "authorizer_id": "000260004",
-                    "authorization_nsu": "20180510122911535",
-                    "created_at": "2018-08-27 14:26:20"
-                }
-            ]
-        },
-        {
-            "id": "6fcbc26bf8d84bd486eb02bb5951a1d7",
-            "resource": "transaction",
-            "status": "succeeded",
-            "amount": "100.32",
-            "original_amount": "100.32",
-            "currency": "BRL",
-            "description": null,
-            "payment_type": "credit",
-            "transaction_number": "Z133937-000260004",
-            "gateway_authorizer": "cielo",
-            "app_transaction_uid": null,
-            "refunds": null,
-            "rewards": null,
-            "discounts": null,
-            "pre_authorization": null,
-            "sales_receipt": "01c955469a8c4d24809ba0357f43c049",
-            "on_behalf_of": "cfa96058daa74d279d17f4908e7f6578",
-            "customer": "64428de9655a4694bb3ff5e81d5af546",
-            "statement_descriptor": "CANALBLOOM",
-            "payment_method": {
-                "id": "0062d96825424112913dbded354c01ea",
-                "resource": "card",
-                "description": null,
-                "card_brand": "MasterCard",
-                "first4_digits": "5316",
-                "last4_digits": "1479",
-                "expiration_month": "10",
-                "expiration_year": "2019",
-                "holder_name": "João Testador",
-                "is_active": true,
-                "is_valid": true,
-                "is_verified": false,
-                "customer": "64428de9655a4694bb3ff5e81d5af546",
-                "fingerprint": "7511b78e35c079de0dd21373f2aeac1c5f7344aefdb459ff7e340e32dc0f2411",
-                "address": null,
-                "verification_checklist": {
-                    "postal_code_check": "unchecked",
-                    "security_code_check": "fail",
-                    "address_line1_check": "unchecked"
-                },
-                "metadata": {},
-                "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/cards/0062d96825424112913dbded354c01ea",
-                "created_at": "2018-08-27T13:16:32+00:00",
-                "updated_at": "2018-08-27T13:46:25+00:00"
-            },
-            "point_of_sale": {
-                "entry_mode": "manually_keyed",
-                "identification_number": null
-            },
-            "installment_plan": {
-                "number_installments": "5",
-                "mode": "interest_free"
-            },
-            "refunded": false,
-            "voided": false,
-            "captured": true,
-            "fees": "4.00",
-            "fee_details": [
-                {
-                    "amount": "4.00",
-                    "prepaid": false,
-                    "currency": "BRL",
-                    "type": "zoop_fee_brazil",
-                    "is_gateway_fee": false,
-                    "description": "Zoop card-present transaction fee"
-                }
-            ],
-            "location_latitude": null,
-            "location_longitude": null,
-            "individual": null,
-            "business": null,
-            "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/transactions/6fcbc26bf8d84bd486eb02bb5951a1d7",
-            "metadata": {},
-            "expected_on": "2018-09-26T00:00:00+00:00",
-            "created_at": "2018-08-27T14:26:05+00:00",
-            "updated_at": "2018-08-27T14:26:07+00:00",
-            "payment_authorization": {
-                "authorizer_id": "000260004",
-                "authorization_code": "133937",
-                "authorization_nsu": "20180510122911535"
-            },
-            "history": [
-                {
-                    "id": "1638f0d5805345cd81d5a57cdb2cfde0",
-                    "transaction": "6fcbc26bf8d84bd486eb02bb5951a1d7",
-                    "amount": "100.32",
-                    "operation_type": "created",
-                    "status": "succeeded",
-                    "response_code": null,
-                    "response_message": null,
-                    "authorization_code": null,
-                    "authorizer_id": null,
-                    "authorization_nsu": null,
-                    "created_at": "2018-08-27 14:26:05"
-                },
-                {
-                    "id": "cccdf4d0dc3943c89d784b55e5f03252",
-                    "transaction": "6fcbc26bf8d84bd486eb02bb5951a1d7",
-                    "amount": "100.32",
-                    "operation_type": "authorization",
-                    "status": "succeeded",
-                    "response_code": "00",
-                    "response_message": null,
-                    "authorization_code": "133937",
-                    "authorizer_id": "000260004",
-                    "authorization_nsu": "20180510122911535",
-                    "created_at": "2018-08-27 14:26:07"
-                }
-            ]
-        },
-        {
-            "id": "791277c3bf034ad38954bfa972860d48",
-            "resource": "transaction",
-            "status": "succeeded",
-            "amount": "100.32",
-            "original_amount": "100.32",
-            "currency": "BRL",
-            "description": null,
-            "payment_type": "credit",
-            "transaction_number": "Z133937-000260004",
-            "gateway_authorizer": "cielo",
-            "app_transaction_uid": null,
-            "refunds": null,
-            "rewards": null,
-            "discounts": null,
-            "pre_authorization": null,
-            "sales_receipt": "28d5114b52954b23bd3d545d13293318",
-            "on_behalf_of": "cfa96058daa74d279d17f4908e7f6578",
-            "customer": "64428de9655a4694bb3ff5e81d5af546",
-            "statement_descriptor": "CANALBLOOM",
-            "payment_method": {
-                "id": "0062d96825424112913dbded354c01ea",
-                "resource": "card",
-                "description": null,
-                "card_brand": "MasterCard",
-                "first4_digits": "5316",
-                "last4_digits": "1479",
-                "expiration_month": "10",
-                "expiration_year": "2019",
-                "holder_name": "João Testador",
-                "is_active": true,
-                "is_valid": true,
-                "is_verified": false,
-                "customer": "64428de9655a4694bb3ff5e81d5af546",
-                "fingerprint": "7511b78e35c079de0dd21373f2aeac1c5f7344aefdb459ff7e340e32dc0f2411",
-                "address": null,
-                "verification_checklist": {
-                    "postal_code_check": "unchecked",
-                    "security_code_check": "fail",
-                    "address_line1_check": "unchecked"
-                },
-                "metadata": {},
-                "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/cards/0062d96825424112913dbded354c01ea",
-                "created_at": "2018-08-27T13:16:32+00:00",
-                "updated_at": "2018-08-27T13:46:25+00:00"
-            },
-            "point_of_sale": {
-                "entry_mode": "manually_keyed",
-                "identification_number": null
-            },
-            "installment_plan": {
-                "number_installments": "5",
-                "mode": "interest_free"
-            },
-            "refunded": false,
-            "voided": false,
-            "captured": true,
-            "fees": "4.00",
-            "fee_details": [
-                {
-                    "amount": "4.00",
-                    "prepaid": false,
-                    "currency": "BRL",
-                    "type": "zoop_fee_brazil",
-                    "is_gateway_fee": false,
-                    "description": "Zoop card-present transaction fee"
-                }
-            ],
-            "location_latitude": null,
-            "location_longitude": null,
-            "individual": null,
-            "business": null,
-            "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/transactions/791277c3bf034ad38954bfa972860d48",
-            "metadata": {},
-            "expected_on": "2018-09-26T00:00:00+00:00",
-            "created_at": "2018-08-27T14:24:21+00:00",
-            "updated_at": "2018-08-27T14:24:23+00:00",
-            "payment_authorization": {
-                "authorizer_id": "000260004",
-                "authorization_code": "133937",
-                "authorization_nsu": "20180510122911535"
-            },
-            "history": [
-                {
-                    "id": "96fa92ff0db7423ba6bbdd9ab04daa32",
-                    "transaction": "791277c3bf034ad38954bfa972860d48",
-                    "amount": "100.32",
-                    "operation_type": "created",
-                    "status": "succeeded",
-                    "response_code": null,
-                    "response_message": null,
-                    "authorization_code": null,
-                    "authorizer_id": null,
-                    "authorization_nsu": null,
-                    "created_at": "2018-08-27 14:24:21"
-                },
-                {
-                    "id": "bbb898c4ad414555bb6e0bfa731b1e7d",
-                    "transaction": "791277c3bf034ad38954bfa972860d48",
-                    "amount": "100.32",
-                    "operation_type": "authorization",
-                    "status": "succeeded",
-                    "response_code": "00",
-                    "response_message": null,
-                    "authorization_code": "133937",
-                    "authorizer_id": "000260004",
-                    "authorization_nsu": "20180510122911535",
-                    "created_at": "2018-08-27 14:24:23"
-                }
-            ]
-        },
-        {
-            "id": "84824e3160a7431fb5004d41eaca4e76",
-            "resource": "transaction",
-            "status": "succeeded",
-            "amount": "100.32",
-            "original_amount": "100.32",
-            "currency": "BRL",
-            "description": null,
-            "payment_type": "credit",
-            "transaction_number": "Z133937-000260004",
-            "gateway_authorizer": "cielo",
-            "app_transaction_uid": null,
-            "refunds": null,
-            "rewards": null,
-            "discounts": null,
-            "pre_authorization": null,
-            "sales_receipt": "12a752faa6dd40b3b04232631ca37610",
-            "on_behalf_of": "cfa96058daa74d279d17f4908e7f6578",
-            "customer": "64428de9655a4694bb3ff5e81d5af546",
-            "statement_descriptor": "CANALBLOOM",
-            "payment_method": {
-                "id": "0062d96825424112913dbded354c01ea",
-                "resource": "card",
-                "description": null,
-                "card_brand": "MasterCard",
-                "first4_digits": "5316",
-                "last4_digits": "1479",
-                "expiration_month": "10",
-                "expiration_year": "2019",
-                "holder_name": "João Testador",
-                "is_active": true,
-                "is_valid": true,
-                "is_verified": false,
-                "customer": "64428de9655a4694bb3ff5e81d5af546",
-                "fingerprint": "7511b78e35c079de0dd21373f2aeac1c5f7344aefdb459ff7e340e32dc0f2411",
-                "address": null,
-                "verification_checklist": {
-                    "postal_code_check": "unchecked",
-                    "security_code_check": "fail",
-                    "address_line1_check": "unchecked"
-                },
-                "metadata": {},
-                "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/cards/0062d96825424112913dbded354c01ea",
-                "created_at": "2018-08-27T13:16:32+00:00",
-                "updated_at": "2018-08-27T13:46:25+00:00"
-            },
-            "point_of_sale": {
-                "entry_mode": "manually_keyed",
-                "identification_number": null
-            },
-            "installment_plan": {
-                "number_installments": "5",
-                "mode": "interest_free"
-            },
-            "refunded": false,
-            "voided": false,
-            "captured": true,
-            "fees": "4.00",
-            "fee_details": [
-                {
-                    "amount": "4.00",
-                    "prepaid": false,
-                    "currency": "BRL",
-                    "type": "zoop_fee_brazil",
-                    "is_gateway_fee": false,
-                    "description": "Zoop card-present transaction fee"
-                }
-            ],
-            "location_latitude": null,
-            "location_longitude": null,
-            "individual": null,
-            "business": null,
-            "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/transactions/84824e3160a7431fb5004d41eaca4e76",
-            "metadata": {},
-            "expected_on": "2018-09-26T00:00:00+00:00",
-            "created_at": "2018-08-27T14:23:50+00:00",
-            "updated_at": "2018-08-27T14:23:52+00:00",
-            "payment_authorization": {
-                "authorizer_id": "000260004",
-                "authorization_code": "133937",
-                "authorization_nsu": "20180510122911535"
-            },
-            "history": [
-                {
-                    "id": "952f6f67a8784290a9643cfb6f68cd8d",
-                    "transaction": "84824e3160a7431fb5004d41eaca4e76",
-                    "amount": "100.32",
-                    "operation_type": "created",
-                    "status": "succeeded",
-                    "response_code": null,
-                    "response_message": null,
-                    "authorization_code": null,
-                    "authorizer_id": null,
-                    "authorization_nsu": null,
-                    "created_at": "2018-08-27 14:23:50"
-                },
-                {
-                    "id": "7c19a005b0cd417e81514b0d85d4a0eb",
-                    "transaction": "84824e3160a7431fb5004d41eaca4e76",
-                    "amount": "100.32",
-                    "operation_type": "authorization",
-                    "status": "succeeded",
-                    "response_code": "00",
-                    "response_message": null,
-                    "authorization_code": "133937",
-                    "authorizer_id": "000260004",
-                    "authorization_nsu": "20180510122911535",
-                    "created_at": "2018-08-27 14:23:52"
-                }
-            ]
+    "id": "ECF36F9AAF374D76A48646EDE8FE806D",
+    "suspended": true,
+    "plan_identifier": "id1",
+    "price_cents": 200,
+    "currency": "BRL",
+    "features": {
+        "feat": {
+            "name": "Feature",
+            "value": 0
         }
-    ],
-    "has_more": false,
-    "limit": 100,
-    "total_pages": 1,
-    "page": 1,
-    "offset": 0,
-    "total": "4",
-    "query_count": "4"
+    },
+    "expires_at": null,
+    "created_at": "2013-11-19T11:24:29-02:00",
+    "updated_at": "2013-11-19T11:24:43-02:00",
+    "customer_name": "Nome do Cliente",
+    "customer_email": "email@email.com",
+    "cycled_at": null,
+    "credits_min": 0,
+    "credits_cycle": null,
+    "customer_id": "FF3149CE52CB4A789925F154B489BFDD",
+    "plan_name": "plan1",
+    "customer_ref": "Nome do Cliente",
+    "plan_ref": "plan1",
+    "active": true,
+    "in_trial": null,
+    "credits": 0,
+    "credits_based": false,
+    "recent_invoices": null,
+    "subitems": [{
+        "id": "6D518D88B33F48FEA8964D5573E220D3",
+        "description": "Item um",
+        "quantity": 1,
+        "price_cents": 1000,
+        "price": "R$ 10,00",
+        "total": "R$ 10,00"
+    }],
+    "logs": [{
+        "id": "477388CC4C024520B552641724A62970",
+        "description": "Fatura criada",
+        "notes": "Fatura criada 1x Ativação de Assinatura: plan1 = R$ 2,00;1x Item um = R$ 10,00;",
+        "created_at": "2013-11-19T11:24:43-02:00"
+    }, {
+        "id": "706436F169CE465B806163964A25400A",
+        "description": "Assinatura Criada",
+        "notes": "Assinatura Criada",
+        "created_at": "2013-11-19T11:24:29-02:00"
+    }],
+    "custom_variables":[]
 }
 ```
-
-This endpoint retrieves all transactions.
-
+## Delete a Subscription
 ### HTTP Request
+`DELETE http://localhost:3000/v1/subscriptions/:id`
 
-`GET http://localhost:3000/v1/transactions`
-
-
-
-## Get a specific Transaction
-
+This endpoint deletes a subscription.
 
 ```shell
-curl "http://localhost:3000/v1/transactions/84824e3160a7431fb5004d41eaca4e76"
-
+curl -X DELETE -H "Accept: Application/json" -H "Content-Type: application/json"\
+ "http://localhost:3000/v1/subscriptions/ECF36F9AAF374D76A48646EDE8FE806D"
 ```
+
+
+
 > The above command returns JSON structured like this:
 
 ```json
 {
-    "id": "84824e3160a7431fb5004d41eaca4e76",
-    "resource": "transaction",
-    "status": "succeeded",
-    "amount": "100.32",
-    "original_amount": "100.32",
+    "id": "ECF36F9AAF374D76A48646EDE8FE806D",
+    "suspended": true,
+    "plan_identifier": "id1",
+    "price_cents": 200,
     "currency": "BRL",
-    "description": null,
-    "payment_type": "credit",
-    "transaction_number": "Z133937-000260004",
-    "gateway_authorizer": "cielo",
-    "app_transaction_uid": null,
-    "refunds": null,
-    "rewards": null,
-    "discounts": null,
-    "pre_authorization": null,
-    "sales_receipt": "12a752faa6dd40b3b04232631ca37610",
-    "on_behalf_of": "cfa96058daa74d279d17f4908e7f6578",
-    "customer": "64428de9655a4694bb3ff5e81d5af546",
-    "statement_descriptor": "CANALBLOOM",
-    "payment_method": {
-        "id": "0062d96825424112913dbded354c01ea",
-        "resource": "card",
-        "description": null,
-        "card_brand": "MasterCard",
-        "first4_digits": "5316",
-        "last4_digits": "1479",
-        "expiration_month": "10",
-        "expiration_year": "2019",
-        "holder_name": "João Testador",
-        "is_active": true,
-        "is_valid": true,
-        "is_verified": false,
-        "customer": "64428de9655a4694bb3ff5e81d5af546",
-        "fingerprint": "7511b78e35c079de0dd21373f2aeac1c5f7344aefdb459ff7e340e32dc0f2411",
-        "address": null,
-        "verification_checklist": {
-            "postal_code_check": "unchecked",
-            "security_code_check": "fail",
-            "address_line1_check": "unchecked"
-        },
-        "metadata": {},
-        "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/cards/0062d96825424112913dbded354c01ea",
-        "created_at": "2018-08-27T13:16:32+00:00",
-        "updated_at": "2018-08-27T13:46:25+00:00"
-    },
-    "point_of_sale": {
-        "entry_mode": "manually_keyed",
-        "identification_number": null
-    },
-    "installment_plan": {
-        "number_installments": "5",
-        "mode": "interest_free"
-    },
-    "refunded": false,
-    "voided": false,
-    "captured": true,
-    "fees": "4.00",
-    "fee_details": [
-        {
-            "amount": "4.00",
-            "prepaid": false,
-            "currency": "BRL",
-            "type": "zoop_fee_brazil",
-            "is_gateway_fee": false,
-            "description": "Zoop card-present transaction fee"
+    "features": {
+        "feat": {
+            "name": "Feature",
+            "value": 0
         }
-    ],
-    "location_latitude": null,
-    "location_longitude": null,
-    "individual": null,
-    "business": null,
-    "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/transactions/84824e3160a7431fb5004d41eaca4e76",
-    "metadata": {},
-    "expected_on": "2018-09-26T00:00:00+00:00",
-    "created_at": "2018-08-27T14:23:50+00:00",
-    "updated_at": "2018-08-27T14:23:52+00:00",
-    "payment_authorization": {
-        "authorizer_id": "000260004",
-        "authorization_code": "133937",
-        "authorization_nsu": "20180510122911535"
     },
-    "history": [
-        {
-            "id": "952f6f67a8784290a9643cfb6f68cd8d",
-            "transaction": "84824e3160a7431fb5004d41eaca4e76",
-            "amount": "100.32",
-            "operation_type": "created",
-            "status": "succeeded",
-            "response_code": null,
-            "response_message": null,
-            "authorization_code": null,
-            "authorizer_id": null,
-            "authorization_nsu": null,
-            "created_at": "2018-08-27 14:23:50"
-        },
-        {
-            "id": "7c19a005b0cd417e81514b0d85d4a0eb",
-            "transaction": "84824e3160a7431fb5004d41eaca4e76",
-            "amount": "100.32",
-            "operation_type": "authorization",
-            "status": "succeeded",
-            "response_code": "00",
-            "response_message": null,
-            "authorization_code": "133937",
-            "authorizer_id": "000260004",
-            "authorization_nsu": "20180510122911535",
-            "created_at": "2018-08-27 14:23:52"
-        }
-    ]
+    "expires_at": null,
+    "created_at": "2013-11-19T11:24:29-02:00",
+    "updated_at": "2013-11-19T11:24:43-02:00",
+    "customer_name": "Nome do Cliente",
+    "customer_email": "email@email.com",
+    "cycled_at": null,
+    "credits_min": 0,
+    "credits_cycle": null,
+    "customer_id": "FF3149CE52CB4A789925F154B489BFDD",
+    "plan_name": "plan1",
+    "customer_ref": "Nome do Cliente",
+    "plan_ref": "plan1",
+    "active": true,
+    "in_trial": null,
+    "credits": 0,
+    "credits_based": false,
+    "recent_invoices": null,
+    "subitems": [{
+        "id": "6D518D88B33F48FEA8964D5573E220D3",
+        "description": "Item um",
+        "quantity": 1,
+        "price_cents": 1000,
+        "price": "R$ 10,00",
+        "total": "R$ 10,00"
+    }],
+    "logs": [{
+        "id": "477388CC4C024520B552641724A62970",
+        "description": "Fatura criada",
+        "notes": "Fatura criada 1x Ativação de Assinatura: plan1 = R$ 2,00;1x Item um = R$ 10,00;",
+        "created_at": "2013-11-19T11:24:43-02:00"
+    }, {
+        "id": "706436F169CE465B806163964A25400A",
+        "description": "Assinatura Criada",
+        "notes": "Assinatura Criada",
+        "created_at": "2013-11-19T11:24:29-02:00"
+    }],
+    "custom_variables":[]
 }
 ```
-
-This endpoint retrieves a specific transaction.
-
-
+## Get a subscription by its id
 ### HTTP Request
+`GET http://localhost:3000/v1/subscriptions/:id`
 
-`GET http://localhost:3000/v1/transactions/:transaction_id`
+This endpoint get a subscription.
 
-### URL Parameters
+```shell
+curl -X GET -H "Accept: Application/json" -H "Content-Type: application/json"\
+ "http://localhost:3000/v1/subscriptions/ECF36F9AAF374D76A48646EDE8FE806D"
+```
 
-Parameter    | Description                              | Required? | Observation
----------    | -----------------------------------------| --------- | -----
-transaction_id | The ID of the transaction to retrieve | yes       |
-on_behalf_of | string - seller id for payment     | no        | Default its Bloom Tester SellerId
 
-## Reverse a specific Transaction
 
+> The above command returns JSON structured like this:
+
+```json
+{
+    "id": "ECF36F9AAF374D76A48646EDE8FE806D",
+    "suspended": false,
+    "plan_identifier": "id1",
+    "price_cents": 200,
+    "currency": "BRL",
+    "features": {
+        "feat": {
+            "name": "Feature",
+            "value": 0
+        }
+    },
+    "expires_at": null,
+    "created_at": "2013-11-19T11:24:29-02:00",
+    "updated_at": "2013-11-19T11:24:43-02:00",
+    "customer_name": "Nome do Cliente",
+    "customer_email": "email@email.com",
+    "cycled_at": null,
+    "credits_min": 0,
+    "credits_cycle": null,
+    "customer_id": "FF3149CE52CB4A789925F154B489BFDD",
+    "plan_name": "plan1",
+    "customer_ref": "Nome do Cliente",
+    "plan_ref": "plan1",
+    "active": true,
+    "in_trial": null,
+    "credits": 0,
+    "credits_based": false,
+    "recent_invoices": null,
+    "subitems": [{
+        "id": "6D518D88B33F48FEA8964D5573E220D3",
+        "description": "Item um",
+        "quantity": 1,
+        "price_cents": 1000,
+        "price": "R$ 10,00",
+        "total": "R$ 10,00"
+    }],
+    "logs": [{
+        "id": "477388CC4C024520B552641724A62970",
+        "description": "Fatura criada",
+        "notes": "Fatura criada 1x Ativação de Assinatura: plan1 = R$ 2,00;1x Item um = R$ 10,00;",
+        "created_at": "2013-11-19T11:24:43-02:00"
+    }, {
+        "id": "706436F169CE465B806163964A25400A",
+        "description": "Assinatura Criada",
+        "notes": "Assinatura Criada",
+        "created_at": "2013-11-19T11:24:29-02:00"
+    }],
+    "custom_variables":[]
+}
+```
+## Activate/reactivate a subscription
+### HTTP Request
+`POST http://localhost:3000/v1/subscriptions/:id/reactivate`
+
+This endpoint activate a subscription.
 
 ```shell
 curl -X POST -H "Accept: Application/json" -H "Content-Type: application/json"\
- "http://localhost:3000/v1/transactions/84824e3160a7431fb5004d41eaca4e76/reverse" \
-  -d '{"amount":"10032"}'
+ "http://localhost:3000/v1/subscriptions/ECF36F9AAF374D76A48646EDE8FE806D/reactivate"
 ```
+
+
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-    "id": "84824e3160a7431fb5004d41eaca4e76",
-    "resource": "transaction",
-    "status": "canceled",
-    "amount": "100.32",
-    "original_amount": "100.32",
+    "id": "ECF36F9AAF374D76A48646EDE8FE806D",
+    "suspended": false,
+    "plan_identifier": "id1",
+    "price_cents": 200,
     "currency": "BRL",
-    "description": null,
-    "payment_type": "credit",
-    "transaction_number": "Z133937-000260004",
-    "gateway_authorizer": "cielo",
-    "app_transaction_uid": null,
-    "refunds": null,
-    "rewards": null,
-    "discounts": null,
-    "pre_authorization": null,
-    "sales_receipt": "12a752faa6dd40b3b04232631ca37610",
-    "on_behalf_of": "cfa96058daa74d279d17f4908e7f6578",
-    "customer": "64428de9655a4694bb3ff5e81d5af546",
-    "statement_descriptor": "CANALBLOOM",
-    "payment_method": {
-        "id": "0062d96825424112913dbded354c01ea",
-        "resource": "card",
-        "description": null,
-        "card_brand": "MasterCard",
-        "first4_digits": "5316",
-        "expiration_month": "10",
-        "expiration_year": "2019",
-        "holder_name": "João Testador",
-        "is_active": true,
-        "is_valid": true,
-        "is_verified": false,
-        "customer": "64428de9655a4694bb3ff5e81d5af546",
-        "fingerprint": "7511b78e35c079de0dd21373f2aeac1c5f7344aefdb459ff7e340e32dc0f2411",
-        "address": null,
-        "verification_checklist": {
-            "postal_code_check": "unchecked",
-            "security_code_check": "fail",
-            "address_line1_check": "unchecked"
-        },
-        "metadata": {},
-        "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/cards/0062d96825424112913dbded354c01ea",
-        "created_at": "2018-08-27T13:16:32+00:00",
-        "updated_at": "2018-08-27T13:46:25+00:00"
-    },
-    "source": null,
-    "point_of_sale": {
-        "entry_mode": "manually_keyed",
-        "identification_number": null
-    },
-    "installment_plan": {
-        "number_installments": "5",
-        "mode": "interest_free"
-    },
-    "refunded": false,
-    "voided": true,
-    "captured": true,
-    "fees": "0.00",
-    "fee_details": null,
-    "location_latitude": null,
-    "location_longitude": null,
-    "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/transactions/84824e3160a7431fb5004d41eaca4e76",
-    "metadata": {},
-    "expected_on": "2018-09-26T00:00:00+00:00",
-    "created_at": "2018-08-27T14:23:50+00:00",
-    "voided_at": "2018-08-27T14:35:43+00:00",
-    "payment_authorization": {
-        "authorizer_id": "000260004",
-        "authorization_code": "133937",
-        "authorization_nsu": "20180510122911535"
-    },
-    "history": [
-        {
-            "id": "952f6f67a8784290a9643cfb6f68cd8d",
-            "transaction": "84824e3160a7431fb5004d41eaca4e76",
-            "amount": "100.32",
-            "operation_type": "created",
-            "status": "succeeded",
-            "response_code": null,
-            "response_message": null,
-            "authorization_code": null,
-            "authorizer_id": null,
-            "authorization_nsu": null,
-            "created_at": "2018-08-27 14:23:50"
-        },
-        {
-            "id": "7c19a005b0cd417e81514b0d85d4a0eb",
-            "transaction": "84824e3160a7431fb5004d41eaca4e76",
-            "amount": "100.32",
-            "operation_type": "authorization",
-            "status": "succeeded",
-            "response_code": "00",
-            "response_message": null,
-            "authorization_code": "133937",
-            "authorizer_id": "000260004",
-            "authorization_nsu": "20180510122911535",
-            "created_at": "2018-08-27 14:23:52"
-        },
-        {
-            "id": "b11e952d900d4eae9c6ad1fe4d4a8a8c",
-            "transaction": "84824e3160a7431fb5004d41eaca4e76",
-            "amount": "100.32",
-            "operation_type": "void",
-            "status": "succeeded",
-            "response_code": "0",
-            "response_message": null,
-            "authorization_code": "105016",
-            "authorizer_id": "0126105452552",
-            "authorization_nsu": "20180510122911537",
-            "created_at": "2018-08-27 14:35:43"
+    "features": {
+        "feat": {
+            "name": "Feature",
+            "value": 0
         }
-    ]
+    },
+    "expires_at": null,
+    "created_at": "2013-11-19T11:24:29-02:00",
+    "updated_at": "2013-11-19T11:24:43-02:00",
+    "customer_name": "Nome do Cliente",
+    "customer_email": "email@email.com",
+    "cycled_at": null,
+    "credits_min": 0,
+    "credits_cycle": null,
+    "customer_id": "FF3149CE52CB4A789925F154B489BFDD",
+    "plan_name": "plan1",
+    "customer_ref": "Nome do Cliente",
+    "plan_ref": "plan1",
+    "active": true,
+    "in_trial": null,
+    "credits": 0,
+    "credits_based": false,
+    "recent_invoices": null,
+    "subitems": [{
+        "id": "6D518D88B33F48FEA8964D5573E220D3",
+        "description": "Item um",
+        "quantity": 1,
+        "price_cents": 1000,
+        "price": "R$ 10,00",
+        "total": "R$ 10,00"
+    }],
+    "logs": [{
+        "id": "477388CC4C024520B552641724A62970",
+        "description": "Fatura criada",
+        "notes": "Fatura criada 1x Ativação de Assinatura: plan1 = R$ 2,00;1x Item um = R$ 10,00;",
+        "created_at": "2013-11-19T11:24:43-02:00"
+    }, {
+        "id": "706436F169CE465B806163964A25400A",
+        "description": "Assinatura Criada",
+        "notes": "Assinatura Criada",
+        "created_at": "2013-11-19T11:24:29-02:00"
+    }],
+    "custom_variables":[]
 }
-
 ```
-
-This endpoint deletes a specific card.
-
-
+## Suspend a subscription
 ### HTTP Request
+`POST http://localhost:3000/v1/subscriptions/:id/suspend`
 
-`POST http://localhost:3000/v1/transactions/:transaction_id/reverse`
-
-### URL Parameters
-
-Parameter    | Description                              | Required? | Observation
----------    | -----------------------------------------| --------- | -----
-transaction_id | The ID of the transaction to retrieve | yes       |
-on_behalf_of | string - seller id for payment     | no        | Default its Bloom Tester SellerId
-
-## Capture a specific Transaction
-
+This endpoint suspend a subscription.
 
 ```shell
 curl -X POST -H "Accept: Application/json" -H "Content-Type: application/json"\
- "http://localhost:3000/v1/transactions/84824e3160a7431fb5004d41eaca4e76/capture" \
-  -d '{"amount":"10032"}'
+ "http://localhost:3000/v1/subscriptions/ECF36F9AAF374D76A48646EDE8FE806D/suspend"
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-    "id": "669a29234d6a4a83bd37542793282abc",
-    "resource": "transaction",
-    "status": "succeeded",
-    "amount": "100.32",
-    "original_amount": "100.32",
+    "id": "ECF36F9AAF374D76A48646EDE8FE806D",
+    "suspended": true,
+    "plan_identifier": "id1",
+    "price_cents": 200,
     "currency": "BRL",
-    "description": null,
-    "payment_type": "credit",
-    "transaction_number": "Z133937-000260004",
-    "gateway_authorizer": "cielo",
-    "app_transaction_uid": null,
-    "refunds": null,
-    "rewards": null,
-    "discounts": null,
-    "pre_authorization": null,
-    "sales_receipt": "055310be5b4244bf8da006a449368420",
-    "on_behalf_of": "cfa96058daa74d279d17f4908e7f6578",
-    "customer": "64428de9655a4694bb3ff5e81d5af546",
-    "statement_descriptor": "CANALBLOOM",
-    "payment_method": {
-        "id": "0062d96825424112913dbded354c01ea",
-        "resource": "card",
-        "description": null,
-        "card_brand": "MasterCard",
-        "first4_digits": "5316",
-        "expiration_month": "10",
-        "expiration_year": "2019",
-        "holder_name": "João Testador",
-        "is_active": true,
-        "is_valid": true,
-        "is_verified": false,
-        "customer": "64428de9655a4694bb3ff5e81d5af546",
-        "fingerprint": "7511b78e35c079de0dd21373f2aeac1c5f7344aefdb459ff7e340e32dc0f2411",
-        "address": null,
-        "verification_checklist": {
-            "postal_code_check": "unchecked",
-            "security_code_check": "fail",
-            "address_line1_check": "unchecked"
-        },
-        "metadata": {},
-        "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/cards/0062d96825424112913dbded354c01ea",
-        "created_at": "2018-08-27T13:16:32+00:00",
-        "updated_at": "2018-08-27T13:46:25+00:00"
-    },
-    "source": null,
-    "point_of_sale": {
-        "entry_mode": "manually_keyed",
-        "identification_number": null
-    },
-    "installment_plan": {
-        "number_installments": "5",
-        "mode": "interest_free"
-    },
-    "refunded": false,
-    "voided": false,
-    "captured": true,
-    "fees": "4.00",
-    "fee_details": [
-        {
-            "amount": "4.00",
-            "prepaid": false,
-            "currency": "BRL",
-            "type": "zoop_fee_brazil",
-            "is_gateway_fee": false,
-            "description": "Zoop card-present transaction fee"
+    "features": {
+        "feat": {
+            "name": "Feature",
+            "value": 0
         }
-    ],
-    "location_latitude": null,
-    "location_longitude": null,
-    "uri": "/v1/marketplaces/dasdnaojudh3quiwhdquiwdhquiwhd7892y3hd8/transactions/669a29234d6a4a83bd37542793282abc",
-    "metadata": {},
-    "expected_on": "2018-09-26T00:00:00+00:00",
-    "created_at": "2018-08-27T14:26:18+00:00",
-    "updated_at": "2018-08-27T14:26:20+00:00",
-    "payment_authorization": {
-        "authorizer_id": "000260004",
-        "authorization_code": "133937",
-        "authorization_nsu": "20180510122911535"
     },
-    "history": [
-        {
-            "id": "3cb8c44457794f6c87adedba4f16cd32",
-            "transaction": "669a29234d6a4a83bd37542793282abc",
-            "amount": "100.32",
-            "operation_type": "created",
-            "status": "succeeded",
-            "response_code": null,
-            "response_message": null,
-            "authorization_code": null,
-            "authorizer_id": null,
-            "authorization_nsu": null,
-            "created_at": "2018-08-27 14:26:18"
-        },
-        {
-            "id": "81b2a682fce844998afa920a4b8705cd",
-            "transaction": "669a29234d6a4a83bd37542793282abc",
-            "amount": "100.32",
-            "operation_type": "authorization",
-            "status": "succeeded",
-            "response_code": "00",
-            "response_message": null,
-            "authorization_code": "133937",
-            "authorizer_id": "000260004",
-            "authorization_nsu": "20180510122911535",
-            "created_at": "2018-08-27 14:26:20"
-        }
-    ]
+    "expires_at": null,
+    "created_at": "2013-11-19T11:24:29-02:00",
+    "updated_at": "2013-11-19T11:24:43-02:00",
+    "customer_name": "Nome do Cliente",
+    "customer_email": "email@email.com",
+    "cycled_at": null,
+    "credits_min": 0,
+    "credits_cycle": null,
+    "customer_id": "FF3149CE52CB4A789925F154B489BFDD",
+    "plan_name": "plan1",
+    "customer_ref": "Nome do Cliente",
+    "plan_ref": "plan1",
+    "active": true,
+    "in_trial": null,
+    "credits": 0,
+    "credits_based": false,
+    "recent_invoices": null,
+    "subitems": [{
+        "id": "6D518D88B33F48FEA8964D5573E220D3",
+        "description": "Item um",
+        "quantity": 1,
+        "price_cents": 1000,
+        "price": "R$ 10,00",
+        "total": "R$ 10,00"
+    }],
+    "logs": [{
+        "id": "477388CC4C024520B552641724A62970",
+        "description": "Fatura criada",
+        "notes": "Fatura criada 1x Ativação de Assinatura: plan1 = R$ 2,00;1x Item um = R$ 10,00;",
+        "created_at": "2013-11-19T11:24:43-02:00"
+    }, {
+        "id": "706436F169CE465B806163964A25400A",
+        "description": "Assinatura Criada",
+        "notes": "Assinatura Criada",
+        "created_at": "2013-11-19T11:24:29-02:00"
+    }],
+    "custom_variables":[]
 }
 ```
 
-This endpoint deletes a specific card.
-
-
+## Get all subscriptions
 ### HTTP Request
+`GET http://localhost:3000/v1/subscriptions`
 
-`POST http://localhost:3000/v1/transactions/:transaction_id/capture`
+This endpoint get all subscriptions.
 
-### URL Parameters
+```shell
+curl -X GET -H "Accept: Application/json" -H "Content-Type: application/json"\
+ "http://localhost:3000/v1/subscriptions"
+```
 
+> The above command returns JSON structured like this:
 
-Parameter    | Description                              | Required? | Observation
----------    | -----------------------------------------| --------- | -----
-transaction_id | The ID of the transaction to retrieve | yes       |
-on_behalf_of | string - seller id for payment     | no        | Default its Bloom Tester SellerId
+```json
+{
+    "facets": {
+        "suspended": {
+            "_type": "filter",
+            "count": 1
+        },
+        "active": {
+            "_type": "filter",
+            "count": 1
+        },
+        "due": {
+            "_type": "filter",
+            "count": 1
+        }
+    },
+    "totalItems": 3,
+    "items": [{
+        "id": "ECF36F9AAF374D76A48646EDE8FE806D",
+        "suspended": false,
+        "plan_identifier": "id2",
+        "price_cents": 200,
+        "currency": "BRL",
+        "features": {
+            "feat": {
+                "name": "Feature",
+                "value": 10
+            }
+        },
+        "expires_at": null,
+        "created_at": "2013-11-19T11:24:29-02:00",
+        "updated_at": "2013-11-19T11:24:43-02:00",
+        "customer_name": "Nome do Cliente",
+        "customer_email": "email@email.com",
+        "cycled_at": null,
+        "customer_id": "FF3149CE52CB4A789925F154B489BFDD",
+        "plan_name": "plan1",
+        "customer_ref": "Nome do Cliente",
+        "plan_ref": "plan1",
+        "active": true,
+        "in_trial": null,
+        "recent_invoices": null,
+        "subitems": [{
+            "id": "6D518D88B33F48FEA8964D5573E220D3",
+            "description": "Item um",
+            "quantity": 1,
+            "price_cents": 1000,
+            "price": "R$ 10,00",
+            "total": "R$ 10,00"
+        }],
+        "logs": [{
+            "id": "477388CC4C024520B552641724A62970",
+            "description": "Fatura criada",
+            "notes": "Fatura criada 1x Ativação de Assinatura: plan1 = R$ 2,00;1x Item um = R$ 10,00;",
+            "created_at": "2013-11-19T11:24:43-02:00"
+        }, {
+            "id": "706436F169CE465B806163964A25400A",
+            "description": "Assinatura Criada",
+            "notes": "Assinatura Criada",
+            "created_at": "2013-11-19T11:24:29-02:00"
+        }]
+    }, {
+        "id": "ECF36F9AAF374D76A48646EDE8FE806D",
+        "suspended": false,
+        "plan_identifier": "id2",
+        "price_cents": 200,
+        "currency": "BRL",
+        "features": {
+            "feat": {
+                "name": "Feature",
+                "value": 10
+            }
+        },
+        "expires_at": null,
+        "created_at": "2013-11-19T11:24:29-02:00",
+        "updated_at": "2013-11-19T11:24:43-02:00",
+        "customer_name": "Nome do Cliente",
+        "customer_email": "email@email.com",
+        "cycled_at": null,
+        "customer_id": "FF3149CE52CB4A789925F154B489BFDD",
+        "plan_name": "plan1",
+        "customer_ref": "Nome do Cliente",
+        "plan_ref": "plan1",
+        "active": true,
+        "in_trial": null,
+        "recent_invoices": null,
+        "subitems": [{
+            "id": "6D518D88B33F48FEA8964D5573E220D3",
+            "description": "Item um",
+            "quantity": 1,
+            "price_cents": 1000,
+            "price": "R$ 10,00",
+            "total": "R$ 10,00"
+        }],
+        "logs": [{
+            "id": "477388CC4C024520B552641724A62970",
+            "description": "Fatura criada",
+            "notes": "Fatura criada 1x Ativação de Assinatura: plan1 = R$ 2,00;1x Item um = R$ 10,00;",
+            "created_at": "2013-11-19T11:24:43-02:00"
+        }, {
+            "id": "706436F169CE465B806163964A25400A",
+            "description": "Assinatura Criada",
+            "notes": "Assinatura Criada",
+            "created_at": "2013-11-19T11:24:29-02:00"
+        }]
+    }, {
+        "id": "ECF36F9AAF374D76A48646EDE8FE806D",
+        "suspended": false,
+        "plan_identifier": "id2",
+        "price_cents": 200,
+        "currency": "BRL",
+        "features": {
+            "feat": {
+                "name": "Feature",
+                "value": 10
+            }
+        },
+        "expires_at": null,
+        "created_at": "2013-11-19T11:24:29-02:00",
+        "updated_at": "2013-11-19T11:24:43-02:00",
+        "customer_name": "Nome do Cliente",
+        "customer_email": "email@email.com",
+        "cycled_at": null,
+        "customer_id": "FF3149CE52CB4A789925F154B489BFDD",
+        "plan_name": "plan1",
+        "customer_ref": "Nome do Cliente",
+        "plan_ref": "plan1",
+        "active": true,
+        "in_trial": null,
+        "recent_invoices": null,
+        "subitems": [{
+            "id": "6D518D88B33F48FEA8964D5573E220D3",
+            "description": "Item um",
+            "quantity": 1,
+            "price_cents": 1000,
+            "price": "R$ 10,00",
+            "total": "R$ 10,00"
+        }],
+        "logs": [{
+            "id": "477388CC4C024520B552641724A62970",
+            "description": "Fatura criada",
+            "notes": "Fatura criada 1x Ativação de Assinatura: plan1 = R$ 2,00;1x Item um = R$ 10,00;",
+            "created_at": "2013-11-19T11:24:43-02:00"
+        }, {
+            "id": "706436F169CE465B806163964A25400A",
+            "description": "Assinatura Criada",
+            "notes": "Assinatura Criada",
+            "created_at": "2013-11-19T11:24:29-02:00"
+        }]
+    }]
+}
+```
 
 # Vouchers
 
